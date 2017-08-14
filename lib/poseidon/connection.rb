@@ -98,6 +98,11 @@ module Poseidon
       read_response(MetadataResponse)
     end
 
+    def available?
+       return nil if @socket.nil? || @socket.closed?
+       true
+    end
+
     private
     def ensure_connected
       if @socket.nil? || @socket.closed?

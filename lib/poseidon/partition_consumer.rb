@@ -149,6 +149,15 @@ module Poseidon
       nil
     end
 
+    # Test whether connected or not the connection to the kafka broker
+    #
+    # @return true if consumer is available,otherwise false
+    #
+    # @api public
+    def available?
+      @connection.available?
+    end
+
     private
     def handle_options(options)
       @max_bytes         = options.delete(:max_bytes) || 1024*1024
