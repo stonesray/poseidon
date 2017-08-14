@@ -56,7 +56,10 @@ module Poseidon
 
     def available_partitions
       @available_partitions ||= struct.partitions.select do |partition|
-        partition.error == 0 && partition.leader != -1
+        if partition.error != 0
+           $log.warn "topic meatadata have error, partition id #{partition.id}, error_code #{partition.error}"
+        end
+        (partition.error == 0 || partition.error == 9) && partition.leader != -1
       end
     end
 
